@@ -20,9 +20,9 @@
 <script>
 /* Connexus: redraw the course-page quote list (.quotes.list) in the new design.
    Quotes stay in the TYPO3 quote library; this only changes how they look.
-   Switched on per page in ON (5 Oct 2026: Stage One only, as a trial). */
+   Switched on per page in ON (5 Oct 2026: the four stage pages). */
 (function(){
-  var ON=[/\/stage-one-foundation-in-transactional-analysis-theory-13\//];
+  var ON=[/\/course\/stage-one-foundation-in-transactional-analysis-theory-13\//,/\/course\/stage-two-a-clinical-training-51\//,/\/course\/stage-two-b-clinical-training-45\//,/\/course\/stage-three-advanced-clinical-training-15\//];
   if(!ON.some(function(r){return r.test(location.pathname);})) return;
   function el(tag,cls,txt){var e=document.createElement(tag); if(cls) e.className=cls; if(txt!=null) e.textContent=txt; return e;}
   function upgrade(list){
@@ -56,6 +56,7 @@
     function stop(){clearInterval(timer); timer=null;}
     root.addEventListener('mouseenter',stop); root.addEventListener('mouseleave',start);
     root.addEventListener('focusin',stop); root.addEventListener('focusout',start);
+    document.addEventListener('visibilitychange',function(){ if(document.hidden) stop(); else start(); });
     start();
   }
   function run(){[].forEach.call(document.querySelectorAll('.quotes.list'),upgrade);}
