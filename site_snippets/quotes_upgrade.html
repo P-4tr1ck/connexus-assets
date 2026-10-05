@@ -20,9 +20,9 @@
 <script>
 /* Connexus: redraw the course-page quote list (.quotes.list) in the new design.
    Quotes stay in the TYPO3 quote library; this only changes how they look.
-   Switched on per page in ON (5 Oct 2026: the four stage pages + TA 101). */
+   Switched on in ON: every course page (5 Oct 2026). Pages without quotes are untouched. */
 (function(){
-  var ON=[/\/course\/stage-one-foundation-in-transactional-analysis-theory-13(\/|$)/,/\/course\/stage-two-a-clinical-training-51(\/|$)/,/\/course\/stage-two-b-clinical-training-45(\/|$)/,/\/course\/stage-three-advanced-clinical-training-15(\/|$)/,/\/course\/ta-101-introduction-to-transactional-analysis-24(\/|$)/];
+  var ON=[/\/course\//];
   if(!ON.some(function(r){return r.test(location.pathname);})) return;
   function el(tag,cls,txt){var e=document.createElement(tag); if(cls) e.className=cls; if(txt!=null) e.textContent=txt; return e;}
   function upgrade(list){
