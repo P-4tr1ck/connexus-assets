@@ -1,0 +1,48 @@
+<div class="cxq" id="cxq-stage1" aria-roledescription="carousel" aria-label="In our students' words">
+<style>
+#cxq-stage1{box-sizing:border-box;margin:8px 0 40px;background:#E6F0F0;border-left:3px solid #DA481D;padding:22px 32px 20px;font-family:Institute,Connexus,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,sans-serif}
+#cxq-stage1 .cxq-eyebrow{color:#DA481D;font-size:14px;letter-spacing:3px;text-transform:uppercase;margin:0 0 24px;font-weight:500}
+#cxq-stage1 .cxq-stage{display:grid}
+#cxq-stage1 figure{grid-area:1/1;margin:0;opacity:0;visibility:hidden;transition:opacity .7s ease,visibility .7s}
+#cxq-stage1 figure.on{opacity:1;visibility:visible}
+#cxq-stage1 .cxq-mark{display:block;color:#DA481D;font-size:56px;line-height:.55;height:26px;font-family:Georgia,serif}
+#cxq-stage1 blockquote{margin:0!important;padding:0!important;border:0!important;background:transparent!important;box-shadow:none!important;quotes:none;color:#133E67;font-size:20px;line-height:1.45;max-width:none;font-style:normal}
+#cxq-stage1 blockquote p{background:transparent!important;margin:0;font-size:inherit;color:inherit;line-height:inherit}
+#cxq-stage1 figcaption{margin-top:14px;font-size:15px;color:#555}
+#cxq-stage1 figcaption b{color:#133E67;font-weight:500}
+#cxq-stage1 .cxq-dots{display:flex;gap:10px;margin-top:18px}
+#cxq-stage1 .cxq-dots button{all:unset;box-sizing:border-box;display:block;width:11px!important;height:11px!important;min-width:0!important;min-height:0!important;border-radius:50%!important;padding:0!important;margin:0!important;background:#c3d3d3!important;cursor:pointer;font-size:0!important;line-height:0!important}
+#cxq-stage1 .cxq-dots button[aria-current="true"]{background:#DA481D!important}
+#cxq-stage1 .cxq-dots button:focus-visible{outline:2px solid #133E67;outline-offset:3px}
+@media (max-width:700px){#cxq-stage1{padding:28px 22px 24px;margin:20px 16px 36px}#cxq-stage1 blockquote{font-size:19px}#cxq-stage1 .cxq-mark{font-size:56px;height:26px}}
+@media (prefers-reduced-motion:reduce){#cxq-stage1 figure{transition:none}}
+#cxq-stage1 .cxq-dots button::before,#cxq-stage1 .cxq-dots button::after{content:none!important;display:none!important}
+</style>
+<p class="cxq-eyebrow">In our students’ words</p>
+<div class="cxq-stage">
+<figure class="on"><span class="cxq-mark" aria-hidden="true">“</span><blockquote><p>This has been the most fabulous course. I have felt so well looked after and wish I had been brave enough to start sooner. The group and tutors are some of the nicest people you’ll ever meet!</p></blockquote><figcaption><b>Meg</b> · Stage One, 2025-26</figcaption></figure>
+<figure><span class="cxq-mark" aria-hidden="true">“</span><blockquote><p>I would highly recommend training at Connexus to anyone considering TA. The Institute provides its students with a highly professional, supportive and welcoming learning environment.</p></blockquote><figcaption><b>Stephanie</b> · Stage One, 2025-26</figcaption></figure>
+<figure><span class="cxq-mark" aria-hidden="true">“</span><blockquote><p>This course has been thought-provoking and transformative. I felt held and seen throughout the course, in a psychologically safe space.</p></blockquote><figcaption><b>Wega</b> · Stage One, 2025-26</figcaption></figure>
+<figure><span class="cxq-mark" aria-hidden="true">“</span><blockquote><p>I have no hesitation in recommending this training to all coaches who want to deepen the psychological aspect of their coaching.</p></blockquote><figcaption><b>Simon</b> · Stage One, 2025-26</figcaption></figure>
+</div>
+<div class="cxq-dots" role="group" aria-label="Choose a quote"></div>
+<script>
+(function(){
+  var root=document.getElementById('cxq-stage1'); if(!root) return;
+  var figs=root.querySelectorAll('figure'), dots=root.querySelector('.cxq-dots'), i=0, timer=null;
+  var still=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function show(n){ figs[i].classList.remove('on'); dots.children[i].removeAttribute('aria-current');
+    i=(n+figs.length)%figs.length; figs[i].classList.add('on'); dots.children[i].setAttribute('aria-current','true'); }
+  figs.forEach(function(f,n){ var b=document.createElement('button'); b.type='button';
+    b.setAttribute('aria-label','Quote '+(n+1)+' of '+figs.length);
+    b.addEventListener('click',function(){ show(n); restart(); }); dots.appendChild(b); });
+  dots.children[0].setAttribute('aria-current','true');
+  function start(){ if(!still && !timer) timer=setInterval(function(){ show(i+1); },9000); }
+  function stop(){ clearInterval(timer); timer=null; }
+  function restart(){ stop(); start(); }
+  root.addEventListener('mouseenter',stop); root.addEventListener('mouseleave',start);
+  root.addEventListener('focusin',stop); root.addEventListener('focusout',start);
+  start();
+})();
+</script>
+</div>
