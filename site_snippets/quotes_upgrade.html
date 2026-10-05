@@ -1,0 +1,64 @@
+<style>
+.cxq-auto{box-sizing:border-box;margin:8px 0 40px;background:#E6F0F0;border-left:3px solid #DA481D;padding:22px 32px 20px;font-family:Institute,Connexus,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,sans-serif}
+.cxq-auto .cxq-eyebrow{color:#DA481D;font-size:14px;letter-spacing:3px;text-transform:uppercase;margin:0 0 24px;font-weight:500}
+.cxq-auto .cxq-stage{display:grid}
+.cxq-auto figure{grid-area:1/1;margin:0;opacity:0;visibility:hidden;transition:opacity .7s ease,visibility .7s}
+.cxq-auto figure.on{opacity:1;visibility:visible}
+.cxq-auto .cxq-mark{display:block;color:#DA481D;font-size:56px;line-height:.55;height:26px;font-family:Georgia,serif}
+.cxq-auto blockquote{margin:0!important;padding:0!important;border:0!important;background:transparent!important;box-shadow:none!important;quotes:none;color:#133E67;font-size:20px;line-height:1.45;font-style:normal}
+.cxq-auto blockquote p{background:transparent!important;margin:0;font-size:inherit;color:inherit;line-height:inherit;font-style:normal}
+.cxq-auto figcaption{margin-top:14px;font-size:15px;color:#555}
+.cxq-auto figcaption b{color:#133E67;font-weight:500}
+.cxq-auto .cxq-dots{display:flex;gap:10px;margin-top:18px}
+.cxq-auto .cxq-dots button{all:unset;box-sizing:border-box;display:block;width:11px!important;height:11px!important;min-width:0!important;min-height:0!important;border-radius:50%!important;padding:0!important;margin:0!important;background:#c3d3d3!important;cursor:pointer;font-size:0!important;line-height:0!important}
+.cxq-auto .cxq-dots button[aria-current="true"]{background:#DA481D!important}
+.cxq-auto .cxq-dots button:focus-visible{outline:2px solid #133E67;outline-offset:3px}
+.cxq-auto .cxq-dots button::before,.cxq-auto .cxq-dots button::after{content:none!important;display:none!important}
+@media (max-width:700px){.cxq-auto{padding:20px 20px 18px}.cxq-auto blockquote{font-size:18px}}
+@media (prefers-reduced-motion:reduce){.cxq-auto figure{transition:none}}
+</style>
+<script>
+/* Connexus: redraw the course-page quote list (.quotes.list) in the new design.
+   Quotes stay in the TYPO3 quote library; this only changes how they look.
+   Switched on per page in ON (5 Oct 2026: Stage One only, as a trial). */
+(function(){
+  var ON=[/\/stage-one-foundation-in-transactional-analysis-theory-13\//];
+  if(!ON.some(function(r){return r.test(location.pathname);})) return;
+  function el(tag,cls,txt){var e=document.createElement(tag); if(cls) e.className=cls; if(txt!=null) e.textContent=txt; return e;}
+  function upgrade(list){
+    var items=[].map.call(list.querySelectorAll('.quote'),function(q){
+      var bq=q.querySelector('blockquote'), au=q.querySelector('.author');
+      return {t:(bq?bq.textContent:'').replace(/\s+/g,' ').trim(), a:(au?au.textContent:'').replace(/\s+/g,' ').trim()};
+    }).filter(function(x){return x.t;});
+    if(!items.length) return;
+    var root=el('div','cxq-auto'); root.setAttribute('aria-label','In our students’ words');
+    root.appendChild(el('p','cxq-eyebrow','In our students’ words'));
+    var stage=el('div','cxq-stage'); root.appendChild(stage);
+    items.forEach(function(it,n){
+      var f=el('figure',n===0?'on':''), m=el('span','cxq-mark','“'); m.setAttribute('aria-hidden','true');
+      var bq=el('blockquote'), p=el('p',null,it.t); bq.appendChild(p);
+      var cap=el('figcaption'), i=it.a.indexOf(',');
+      if(i>0){cap.appendChild(el('b',null,it.a.slice(0,i))); cap.appendChild(document.createTextNode(' · '+it.a.slice(i+1).trim()));}
+      else cap.appendChild(el('b',null,it.a));
+      f.appendChild(m); f.appendChild(bq); f.appendChild(cap); stage.appendChild(f);
+    });
+    list.parentNode.replaceChild(root,list);
+    if(items.length<2) return;
+    var figs=stage.children, dots=el('div','cxq-dots'), cur=0, timer=null;
+    dots.setAttribute('role','group'); dots.setAttribute('aria-label','Choose a quote'); root.appendChild(dots);
+    var still=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function show(n){figs[cur].classList.remove('on'); dots.children[cur].removeAttribute('aria-current');
+      cur=(n+figs.length)%figs.length; figs[cur].classList.add('on'); dots.children[cur].setAttribute('aria-current','true');}
+    [].forEach.call(figs,function(f,n){var b=el('button'); b.type='button'; b.setAttribute('aria-label','Quote '+(n+1)+' of '+figs.length);
+      b.addEventListener('click',function(){show(n); stop(); start();}); dots.appendChild(b);});
+    dots.children[0].setAttribute('aria-current','true');
+    function start(){if(!still&&!timer) timer=setInterval(function(){show(cur+1);},9000);}
+    function stop(){clearInterval(timer); timer=null;}
+    root.addEventListener('mouseenter',stop); root.addEventListener('mouseleave',start);
+    root.addEventListener('focusin',stop); root.addEventListener('focusout',start);
+    start();
+  }
+  function run(){[].forEach.call(document.querySelectorAll('.quotes.list'),upgrade);}
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',run); else run();
+})();
+</script>
