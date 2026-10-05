@@ -1,21 +1,22 @@
 <div class="cxq" id="cxq-pathway" aria-roledescription="carousel" aria-label="In our students' words">
 <style>
-#cxq-pathway{background:#F6F0E8;padding:56px 64px 44px;margin:24px 0 40px;font-family:Institute,Connexus,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,sans-serif}
+#cxq-pathway{box-sizing:border-box;max-width:1058px;margin:24px auto 48px;background:#F6F0E8;padding:52px 60px 40px;font-family:Institute,Connexus,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,sans-serif}
 #cxq-pathway .cxq-eyebrow{color:#DA481D;font-size:14px;letter-spacing:3px;text-transform:uppercase;margin:0 0 18px;font-weight:500}
 #cxq-pathway .cxq-stage{display:grid}
 #cxq-pathway figure{grid-area:1/1;margin:0;opacity:0;visibility:hidden;transition:opacity .7s ease,visibility .7s}
 #cxq-pathway figure.on{opacity:1;visibility:visible}
 #cxq-pathway .cxq-mark{display:block;color:#DA481D;font-size:96px;line-height:.55;height:44px;font-family:Georgia,serif}
-#cxq-pathway blockquote{margin:0;padding:0;border:0;color:#133E67;font-size:28px;line-height:1.4;max-width:860px;font-style:normal}
-#cxq-pathway blockquote p{margin:0;font-size:inherit;color:inherit;line-height:inherit}
+#cxq-pathway blockquote{margin:0!important;padding:0!important;border:0!important;background:transparent!important;box-shadow:none!important;quotes:none;color:#133E67;font-size:28px;line-height:1.4;max-width:860px;font-style:normal}
+#cxq-pathway blockquote p{background:transparent!important;margin:0;font-size:inherit;color:inherit;line-height:inherit}
 #cxq-pathway figcaption{margin-top:20px;font-size:16px;color:#555}
 #cxq-pathway figcaption b{color:#133E67;font-weight:500}
 #cxq-pathway .cxq-dots{display:flex;gap:10px;margin-top:32px}
-#cxq-pathway .cxq-dots button{width:11px;height:11px;border-radius:50%;border:0;padding:0;background:#d5cec1;cursor:pointer}
-#cxq-pathway .cxq-dots button[aria-current="true"]{background:#DA481D}
+#cxq-pathway .cxq-dots button{all:unset;box-sizing:border-box;display:block;width:11px!important;height:11px!important;min-width:0!important;min-height:0!important;border-radius:50%!important;padding:0!important;margin:0!important;background:#d5cec1!important;cursor:pointer;font-size:0!important;line-height:0!important}
+#cxq-pathway .cxq-dots button[aria-current="true"]{background:#DA481D!important}
 #cxq-pathway .cxq-dots button:focus-visible{outline:2px solid #133E67;outline-offset:3px}
-@media (max-width:700px){#cxq-pathway{padding:36px 22px 30px}#cxq-pathway blockquote{font-size:21px}#cxq-pathway .cxq-mark{font-size:72px;height:34px}}
+@media (max-width:700px){#cxq-pathway{padding:34px 22px 28px;margin:20px 16px 36px}#cxq-pathway blockquote{font-size:21px}#cxq-pathway .cxq-mark{font-size:72px;height:34px}}
 @media (prefers-reduced-motion:reduce){#cxq-pathway figure{transition:none}}
+#cxq-pathway .cxq-dots button::before,#cxq-pathway .cxq-dots button::after{content:none!important;display:none!important}
 </style>
 <p class="cxq-eyebrow">In our students’ words</p>
 <div class="cxq-stage">
